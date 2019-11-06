@@ -1,6 +1,6 @@
-package access2authority.package2;
+package wooter.access2authority.package2;
 
-import access2authority.package1.Person;
+import wooter.access2authority.package1.Person;
 
 /**
  * Created by taota on 2019/3/27.

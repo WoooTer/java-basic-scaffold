@@ -1,9 +1,9 @@
-package access2authority;
+package wooter.access2authority;
 
-import access2authority.package1.Animal;
-import access2authority.package1.Person;
-import access2authority.package2.Person2;
-import access2authority.package2.Person3;
+import wooter.access2authority.package1.Animal;
+import wooter.access2authority.package1.Person;
+import wooter.access2authority.package2.Person2;
+import wooter.access2authority.package2.Person3;
 
 /**
  * 类在继承结构中的同名属性是共存的，不会覆盖。

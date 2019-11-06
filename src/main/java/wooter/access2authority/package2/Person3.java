@@ -1,4 +1,4 @@
-package access2authority.package2;
+package wooter.access2authority.package2;
 
 /**
  * Created by taota on 2019/3/27.
