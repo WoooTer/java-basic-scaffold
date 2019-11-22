@@ -1,4 +1,4 @@
-package wooter.file;
+package wooter.io.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
