@@ -1,9 +1,9 @@
 package wooter.algorithm.stringCompress;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import wooter.concurrency.MyTimer;
+
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class DecimalConverter {
 
@@ -84,9 +84,13 @@ public class DecimalConverter {
     }
 
     public static void main(String[] args) {
-        DecimalConverter decimalChange = new DecimalConverter(10, 94);
-        String numConverted = decimalChange.convert("93");
+        DecimalConverter decimalChange = new DecimalConverter(16, 94);
+
+        LocalDateTime start = LocalDateTime.now(); //Timer
+        String numConverted = decimalChange.convert("2321fa2312d");
         System.out.println(numConverted);
+        MyTimer.getDurationToMillis(start); //Timer
+
         String sourceNum = decimalChange.recoverToStr(numConverted);
         System.out.println(sourceNum);
     }

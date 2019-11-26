@@ -1,7 +1,9 @@
 package wooter.algorithm.stringCompress;
 
 import org.apache.commons.lang3.StringUtils;
+import wooter.concurrency.MyTimer;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Base94Code {
@@ -49,10 +51,15 @@ public class Base94Code {
     public static void main(String[] args) {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         System.out.println(uuid);
+
+        LocalDateTime start = LocalDateTime.now(); //Timer
         String compressed = Base94Code.compressUUID(uuid);
         System.out.println(compressed);
+        MyTimer.getDurationToMillis(start); //Timer
+
         String decompressed = Base94Code.decompressUUID(compressed);
         System.out.println(decompressed);
+        MyTimer.getDurationToMillis(start); //Timer
     }
 
 }
