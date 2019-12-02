@@ -12,7 +12,7 @@ public class Base94Code {
     private static final int targetDividedSize = 5;
 
     /**
-     * 将32位uuid压缩至20位长度
+     * 将32位uuid压缩至20位长度，压缩比为0.625
      * @param uuid
      * @return
      */

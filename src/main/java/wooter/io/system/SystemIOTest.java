@@ -1,4 +1,4 @@
-package wooter.io;
+package wooter.io.system;
 
 import java.io.BufferedReader;
 import java.io.IOException;
