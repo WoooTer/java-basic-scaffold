@@ -1,4 +1,4 @@
-package wooter.io.reader;
+package wooter.io_learning.io.reader;
 
 import java.io.*;
 import java.nio.charset.Charset;

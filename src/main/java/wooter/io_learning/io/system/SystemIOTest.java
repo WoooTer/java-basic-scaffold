@@ -1,4 +1,4 @@
-package wooter.io.system;
+package wooter.io_learning.io.system;
 
 import java.io.BufferedReader;
 import java.io.IOException;

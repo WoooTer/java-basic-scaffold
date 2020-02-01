@@ -1,4 +1,4 @@
-package wooter.io.stream;
+package wooter.io_learning.io.stream;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
