@@ -6,6 +6,10 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * 架构设计：系统间通信（3）——IO通信模型和JAVA实践 上篇
+ * https://blog.csdn.net/yinwenjie/article/details/48472237
+ */
 public class BioSocketServer {
 
     public static void main(String[] args) throws Exception {

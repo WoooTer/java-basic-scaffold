@@ -1,4 +1,4 @@
-package wooter.io_learning.nio2;
+package wooter.io_learning.io_model.aio;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,11 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * JAVA AIO框架测试。请一定将
- * 《架构设计：系统间通信（4）——IO通信模型和JAVA实践 中篇》看了后再看本篇测试代码。
- * 这样对您理解代码的关键点非常有益。
- *
- * @author yinwenjie
+ * 架构设计：系统间通信（5）——IO通信模型和JAVA实践 下篇
+ * https://blog.csdn.net/yinwenjie/article/details/48784375
  */
 public class AsyncEchoServer {
 

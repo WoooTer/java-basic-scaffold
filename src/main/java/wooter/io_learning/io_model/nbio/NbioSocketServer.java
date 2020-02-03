@@ -7,7 +7,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-
+/**
+ * 架构设计：系统间通信（3）——IO通信模型和JAVA实践 上篇
+ * https://blog.csdn.net/yinwenjie/article/details/48472237
+ */
 public class NbioSocketServer {
 
     private static Object xWait = new Object();

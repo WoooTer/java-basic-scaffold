@@ -12,6 +12,10 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+/**
+ * 架构设计：系统间通信（4）——IO通信模型和JAVA实践 中篇
+ * https://blog.csdn.net/yinwenjie/article/details/48522403
+ */
 public class MultiplexSocketServer {
 
     public static void main(String[] args) throws Exception {
