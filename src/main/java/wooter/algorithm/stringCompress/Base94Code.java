@@ -1,7 +1,7 @@
 package wooter.algorithm.stringCompress;
 
 import org.apache.commons.lang3.StringUtils;
-import wooter.concurrency.MyTimer;
+import wooter.utils.MyTimer;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

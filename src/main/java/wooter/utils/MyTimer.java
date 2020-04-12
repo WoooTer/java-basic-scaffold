@@ -1,4 +1,4 @@
-package wooter.concurrency;
+package wooter.utils;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
