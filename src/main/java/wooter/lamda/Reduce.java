@@ -54,7 +54,9 @@ public class Reduce {
             }
             return b;
         });
-        System.out.println(result);
+        if (result.size() >= certainConsecutive) {
+            System.out.println(result);
+        }
     }
 
     public void increaseSegmentAtLeastCertainConsecutiveAndShowOnceConditioned(int certainConsecutive) {

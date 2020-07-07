@@ -1,4 +1,4 @@
-package wooter.concurrency;
+package wooter.concurrency.oracle.tutorials;
 
 /**
  * https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/thread-livelock.html

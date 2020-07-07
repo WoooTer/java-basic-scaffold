@@ -1,4 +1,4 @@
-package wooter.concurrency;
+package wooter.concurrency.oracle.tutorials;
 
 import java.util.Random;
 
@@ -73,9 +73,7 @@ class Producer implements Runnable {
         };
         Random random = new Random();
 
-        for (int i = 0;
-             i < importantInfo.length;
-             i++) {
+        for (int i = 0; i < importantInfo.length; i++) {
             drop.put(importantInfo[i]);
             try {
                 Thread.sleep(random.nextInt(5000));
@@ -94,9 +92,7 @@ class Consumer implements Runnable {
 
     public void run() {
         Random random = new Random();
-        for (String message = drop.take();
-             ! message.equals("DONE");
-             message = drop.take()) {
+        for (String message = drop.take(); ! message.equals("DONE"); message = drop.take()) {
             System.out.format("MESSAGE RECEIVED: %s%n", message);
             try {
                 Thread.sleep(random.nextInt(5000));

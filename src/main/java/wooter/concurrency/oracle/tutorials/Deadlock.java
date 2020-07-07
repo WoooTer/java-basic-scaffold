@@ -1,4 +1,4 @@
-package wooter.concurrency;
+package wooter.concurrency.oracle.tutorials;
 
 public class Deadlock {
     static class Friend {
