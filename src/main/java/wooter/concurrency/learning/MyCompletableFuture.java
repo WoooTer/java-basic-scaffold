@@ -7,8 +7,9 @@ import java.util.stream.Stream;
 
 /**
  * [使用CompletableFuture](https://www.liaoxuefeng.com/wiki/1252599548343744/1306581182447650)
- * [深入解读CompletableFuture源码与原理](https://blog.csdn.net/CoderBruis/article/details/103181520)
  * [Guide To CompletableFuture](https://www.baeldung.com/java-completablefuture)
+ * [20个使用 Java CompletableFuture的例子](https://colobu.com/2018/03/12/20-Examples-of-Using-Java%E2%80%99s-CompletableFuture/)
+ * [深入解读CompletableFuture源码与原理](https://blog.csdn.net/CoderBruis/article/details/103181520)
  */
 public class MyCompletableFuture {
 
