@@ -1,4 +1,4 @@
-package wooter.concurrency.learning;
+package wooter.concurrency.learning.semaphore;
 
 import java.util.concurrent.Semaphore;
 
