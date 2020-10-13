@@ -1,4 +1,4 @@
-package wooter.algorithm.stringCompress;
+package wooter.algorithm.wooter.stringCompress;
 
 import java.util.Scanner;
 import java.util.Stack;

@@ -1,4 +1,4 @@
-package wooter.algorithm.bitOperation;
+package wooter.algorithm.wooter.bitOperation;
 
 public class EfficientMath {
 

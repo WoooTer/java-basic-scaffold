@@ -3,21 +3,15 @@ package wooter.algorithm.iamshuaidi;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * [https://github.com/iamshuaidi/algo-basic]
+ */
 public class Recursion {
 
     public static void main(String[] args) {
-        System.out.println(stepProblem(7));
-
-//        Node node4 = new Node(4, null);
-//        Node node3 = new Node(3, node4);
-//        Node node2 = new Node(2, node3);
-//        Node node1 = new Node(1, node2);
-//        node1.printAllNodes();
-//        Node reverseNode = reverseList(node1);
-//        reverseNode.printAllNodes();
-
+        test_step();
+        test_reverseList();
     }
-
 
     static int factorial(int n) {
         if (n <= 2) {
@@ -41,11 +35,34 @@ public class Recursion {
      * 小青蛙跳台阶：
      * 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法
      */
-    static int stepProblem(int n) {
+    static int stepByRecursion(int n) {
         if (n <= 2) {
             return n;
         }
-        return stepProblem(n - 1) + stepProblem(n - 2);
+        return stepByRecursion(n - 1) + stepByRecursion(n - 2);
+    }
+
+    static int stepByDP(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        // 先创建一个数组来保存历史数据
+        int[] dp = new int[n + 1];
+        // 给出初始值
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        // 通过关系式来计算出 dp[n]
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+
+    static void test_step(){
+        int step = 7;
+        System.out.println("递归: " + stepByRecursion(7));
+        System.out.println("动归: " + stepByDP(7));
     }
 
     /**
@@ -63,6 +80,16 @@ public class Recursion {
         head.next = null;
         // 把调整之后的链表返回
         return newList;
+    }
+
+    static void test_reverseList() {
+        Node node4 = new Node(4, null);
+        Node node3 = new Node(3, node4);
+        Node node2 = new Node(2, node3);
+        Node node1 = new Node(1, node2);
+        node1.printAllNodes();
+        Node reverseNode = reverseList(node1);
+        reverseNode.printAllNodes();
     }
 
 }

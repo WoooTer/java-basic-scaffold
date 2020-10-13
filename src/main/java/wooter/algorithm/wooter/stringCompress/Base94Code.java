@@ -1,4 +1,4 @@
-package wooter.algorithm.stringCompress;
+package wooter.algorithm.wooter.stringCompress;
 
 import org.apache.commons.lang3.StringUtils;
 import wooter.utils.MyTimer;
