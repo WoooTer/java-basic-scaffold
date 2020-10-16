@@ -3,9 +3,6 @@ package wooter.algorithm.iamshuaidi;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * [https://github.com/iamshuaidi/algo-basic]
- */
 public class Recursion {
 
     public static void main(String[] args) {
