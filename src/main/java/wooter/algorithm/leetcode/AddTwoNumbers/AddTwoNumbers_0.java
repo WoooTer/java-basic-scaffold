@@ -57,7 +57,10 @@ public class AddTwoNumbers_0 {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(9, new ListNode(9, new ListNode(9)));
         ListNode l2 = new ListNode(9, new ListNode(9));
+        l1.print();
+        l2.print();
+
         ListNode node = new AddTwoNumbers_0().addTwoNumbers_1(l1, l2);
-        System.out.println(node);
+        node.print();
     }
 }
