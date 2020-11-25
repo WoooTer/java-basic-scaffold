@@ -5,6 +5,9 @@ package wooter.algorithm.leetcode.AddTwoNumbers;
  */
 public class AddTwoNumbers_0 {
 
+    /**
+     * while 形式
+     */
     public ListNode addTwoNumbers_0(ListNode l1, ListNode l2) {
         ListNode head = null, tail = null;
         int carry = 0; // 进位数
@@ -30,6 +33,9 @@ public class AddTwoNumbers_0 {
         return head;
     }
 
+    /**
+     * for 形式
+     */
     public ListNode addTwoNumbers_1(ListNode l1, ListNode l2) {
         ListNode head = null, tail = null;
         int carry = 0; // 进位数

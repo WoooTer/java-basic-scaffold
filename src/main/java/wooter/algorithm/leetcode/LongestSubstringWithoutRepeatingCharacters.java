@@ -9,6 +9,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     /**
      * 时间复杂度：O(n^3)
+     * 暴力求解
      */
     public int lengthOfLongestSubstring_0(String s) {
         Set<Character> set = new HashSet<>();
@@ -46,9 +47,11 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     /**
      * 时间复杂度：O(n^2)
+     * 使用了滑动窗口及 Map 数据结构，但每次都要遍历删除掉 Map 的无效值
      */
     public int lengthOfLongestSubstring_1(String s) {
-        Map<Character, Integer> map = new HashMap<>();
+        int count = (int) Arrays.stream(s.split("")).distinct().count(); // 收效甚微
+        Map<Character, Integer> map = new HashMap<>(count);
         int sub_i = 0, sub_j = 0;
 
         int i = 0, j = 0;
@@ -83,11 +86,11 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return sub_j - sub_i;
     }
 
-    void _removeMapElement(Map<Character, Integer> map, Integer i){
+    private void _removeMapElement(Map<Character, Integer> map, Integer i) {
         Iterator<Map.Entry<Character, Integer>> it = map.entrySet().iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Map.Entry<Character, Integer> entry = it.next();
-            if (entry.getValue() < i){
+            if (entry.getValue() < i) {
                 it.remove();
             }
         }
@@ -98,38 +101,82 @@ public class LongestSubstringWithoutRepeatingCharacters {
 //        map.entrySet().removeIf(e -> e.getValue() < i);
     }
 
-    public int lengthOfLongestSubstring(String s) {
-        if (s.length() == 0) {
-            return 0;
-        }
-        int inlen = s.length();
-        int result = 0;
-        int start = 0;  // 左指针初始位置
-        int end = 0;    // 右指针初始位置
-        HashSet<Character> subset = new HashSet<>();
-        subset.add(s.charAt(0)); // 先把第0个字符放入Set
+    /**
+     * 时间复杂度：O(n)
+     * 使用了滑动窗口及 Map 数据结构，并直接通过下标 i 来记录 Map 的无效值
+     */
+    public int lengthOfLongestSubstring_2(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int sub_i = 0, sub_j = 0;
 
-        while (start < inlen) {
-            // 先判断长度，再判断是否包含字符，避免越界
-            // end初始位置是0，0号字符已被加入集合，从下一个字符开始计算
-            while (end + 1 < inlen && ! subset.contains(s.charAt(end + 1)) ) {
-                subset.add(s.charAt(end + 1));
-                end++;
+        int i = 0, j = 0;
+        while (j < s.length()) {
+
+            char c = s.charAt(j);
+            if (_isMapElementValid(map, c, i)) {
+                if (j - i > sub_j - sub_i) {
+                    sub_j = j;
+                    sub_i = i;
+                }
+                i = map.get(c) + 1;
+                map.put(c, j);
+                j++;
+                continue;
             }
-            result = Math.max(result, end - start + 1);
-            if (end + 1 == inlen) { // 右指针移动到最后，可以终止计算，不需要再循环
+            if (j == s.length() - 1) {
+                if (j + 1 - i > sub_j - sub_i) {
+                    sub_j = j + 1;
+                    sub_i = i;
+                }
                 break;
             }
-            subset.remove(s.charAt(start));
-            start ++;
+            if (!_isMapElementValid(map, c, i)) {
+                map.put(c, j);
+                j++;
+            }
+
         }
 
-        return result;
+        System.out.println(s.substring(sub_i, sub_j));
+        return sub_j - sub_i;
+    }
+
+    private boolean _isMapElementValid(Map<Character, Integer> map, char element, int window_i) {
+        return map.containsKey(element) && map.get(element) >= window_i;
+    }
+
+    /**
+     * 时间复杂度：O(n^2)，但由于 Set 内部由 Map 实现，所以复杂度降为 O(n)
+     * 使用了滑动窗口及 Set 数据结构
+     *
+     * pwwkew：[p]wwkew --> [pw]wkew --> p[w]wkew --> pww[]kew --> pww[k]ew --> pww[ke]w --> pww[kew]
+     */
+    public int lengthOfLongestSubstring_3(String s) {
+        Set<Character> set = new HashSet<>();
+        int sub_i = 0, sub_j = 0;
+
+        int i = 0, j = 0;
+        while (j < s.length()){
+
+            while (j < s.length() && !set.contains(s.charAt(j))){
+                set.add(s.charAt(j));
+                j++;
+            }
+            if (j - i > sub_j - sub_i) {
+                sub_j = j;
+                sub_i = i;
+            }
+            set.remove(s.charAt(i));
+            i++;
+
+        }
+        System.out.println(s.substring(sub_i, sub_j));
+        return sub_j - sub_i;
     }
 
     public static void main(String[] args) {
-        // tmmzuxt, abcabcbb, pwwkew
-        int r = new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring("pwwkew");
+        // tmmzuxt, abcabcbb, pwwkew, aabaab!bb
+        int r = new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring_3("tmmzuxt");
         System.out.println(r);
     }
 

@@ -5,15 +5,29 @@ import java.util.Map;
 
 public class StringToIntegerAtoi_0 {
 
-    public Map<String, Integer> numMap = new HashMap<>();
+    private Map<String, Integer> numMap = new HashMap<>();
 
-    public void _initNumMap(){
+    public int myAtoi(String s) {
+        _initNumMap();
+        String f = _filter(s);
+        try {
+            return Integer.valueOf(f);
+        } catch (Exception e) {
+            if (f.contains("-")){
+                return Integer.MIN_VALUE;
+            } else {
+                return Integer.MAX_VALUE;
+            }
+        }
+    }
+
+    private void _initNumMap(){
         for (int i = 0; i <= 9; i++){
             this.numMap.put(Integer.toString(i), i);
         }
     }
 
-    public String _filter(String s){
+    private String _filter(String s){
         String[] arr = s.split("");
         int start = -1;
         int end = arr.length;
@@ -42,20 +56,6 @@ public class StringToIntegerAtoi_0 {
             return "0";
         } else {
             return f;
-        }
-    }
-
-    public int myAtoi(String s) {
-        _initNumMap();
-        String f = _filter(s);
-        try {
-            return Integer.valueOf(f);
-        } catch (Exception e) {
-            if (f.contains("-")){
-                return Integer.MIN_VALUE;
-            } else {
-                return Integer.MAX_VALUE;
-            }
         }
     }
 
