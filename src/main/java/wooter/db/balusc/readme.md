@@ -1,0 +1,1 @@
+- [DAO tutorial - the data layer](https://balusc.omnifaces.org/2008/07/dao-tutorial-data-layer.html)

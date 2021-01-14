@@ -1,4 +1,4 @@
-package wooter.jdbc.spi;
+package wooter.db.jdbc.spi;
 
 public class TextHello implements HelloSPI {
 
