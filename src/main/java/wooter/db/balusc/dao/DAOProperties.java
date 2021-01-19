@@ -6,10 +6,19 @@ import java.util.Properties;
 
 public class DAOProperties {
 
+    // Vars ---------------------------------------------------------------------------------------
+
+    private String specificKey = "wtdb.jdbc";
+
     // Constants ----------------------------------------------------------------------------------
 
     private static final String PROPERTIES_FILE = "dao.properties";
     private static final Properties PROPERTIES = new Properties();
+
+    private static final String PROPERTY_URL = "url";
+    private static final String PROPERTY_DRIVER = "driver";
+    private static final String PROPERTY_USERNAME = "username";
+    private static final String PROPERTY_PASSWORD = "password";
 
     static {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -28,21 +37,21 @@ public class DAOProperties {
         }
     }
 
-    // Vars ---------------------------------------------------------------------------------------
-
-    private String specificKey;
-
     // Constructors -------------------------------------------------------------------------------
 
     /**
      * Construct a DAOProperties instance for the given specific key which is to be used as property
      * key prefix of the DAO properties file.
+     *
      * @param specificKey The specific key which is to be used as property key prefix.
      * @throws DAOConfigurationException During class initialization if the DAO properties file is
-     * missing in the classpath or cannot be loaded.
+     *                                   missing in the classpath or cannot be loaded.
      */
     public DAOProperties(String specificKey) throws DAOConfigurationException {
         this.specificKey = specificKey;
+    }
+
+    public DAOProperties() {
     }
 
     // Actions ------------------------------------------------------------------------------------
@@ -50,11 +59,12 @@ public class DAOProperties {
     /**
      * Returns the DAOProperties instance specific property value associated with the given key with
      * the option to indicate whether the property is mandatory or not.
-     * @param key The key to be associated with a DAOProperties instance specific value.
+     *
+     * @param key       The key to be associated with a DAOProperties instance specific value.
      * @param mandatory Sets whether the returned property value should not be null nor empty.
      * @return The DAOProperties instance specific property value associated with the given key.
      * @throws DAOConfigurationException If the returned property value is null or empty while
-     * it is mandatory.
+     *                                   it is mandatory.
      */
     public String getProperty(String key, boolean mandatory) throws DAOConfigurationException {
         String fullKey = specificKey + "." + key;
@@ -71,6 +81,22 @@ public class DAOProperties {
         }
 
         return property;
+    }
+
+    public String getUrl() {
+        return getProperty(PROPERTY_URL, true);
+    }
+
+    public String getDriverClassName() {
+        return getProperty(PROPERTY_DRIVER, false);
+    }
+
+    public String getUsername() {
+        return getProperty(PROPERTY_USERNAME, getPassword() != null);
+    }
+
+    public String getPassword() {
+        return getProperty(PROPERTY_PASSWORD, false);
     }
 
 }

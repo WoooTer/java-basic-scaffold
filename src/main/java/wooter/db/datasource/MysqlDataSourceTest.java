@@ -1,22 +1,22 @@
-package wooter.db.jdbc;
+package wooter.db.datasource;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import wooter.db.balusc.dao.DAOProperties;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
-/**
- * [Jenkov - Java JDBC](http://tutorials.jenkov.com/jdbc/index.html)
- * [The Java™ Tutorials - JDBC Database Access](https://docs.oracle.com/javase/tutorial/jdbc/)
- */
-public class MyStatement {
+public class MysqlDataSourceTest {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         DAOProperties properties = new DAOProperties();
-        String url = properties.getUrl();
-        String user = properties.getUsername();
-        String password = properties.getPassword();
 
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setURL(properties.getUrl());
+        dataSource.setUser(properties.getUsername());
+        dataSource.setPassword(properties.getPassword());
+
+        try (Connection connection = dataSource.getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 String sql = "select * from product";
                 try (ResultSet result = statement.executeQuery(sql)) {

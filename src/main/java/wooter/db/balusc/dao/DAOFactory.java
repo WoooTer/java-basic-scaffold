@@ -10,13 +10,6 @@ import javax.sql.DataSource;
 
 public abstract class DAOFactory {
 
-    // Constants ----------------------------------------------------------------------------------
-
-    private static final String PROPERTY_URL = "url";
-    private static final String PROPERTY_DRIVER = "driver";
-    private static final String PROPERTY_USERNAME = "username";
-    private static final String PROPERTY_PASSWORD = "password";
-
     // Actions ------------------------------------------------------------------------------------
 
     /**
@@ -33,10 +26,10 @@ public abstract class DAOFactory {
         }
 
         DAOProperties properties = new DAOProperties(name);
-        String url = properties.getProperty(PROPERTY_URL, true);
-        String driverClassName = properties.getProperty(PROPERTY_DRIVER, false);
-        String password = properties.getProperty(PROPERTY_PASSWORD, false);
-        String username = properties.getProperty(PROPERTY_USERNAME, password != null);
+        String url = properties.getUrl();
+        String driverClassName = properties.getDriverClassName();
+        String password = properties.getPassword();
+        String username = properties.getUsername();
         DAOFactory instance;
 
         // If driver is specified, then load it to let it register itself with DriverManager.
