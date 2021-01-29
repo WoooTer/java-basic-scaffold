@@ -1,4 +1,4 @@
-package wooter.design_pattern.proxy.static_;
+package wooter.design_pattern.proxy._static;
 
 import wooter.design_pattern.proxy.Subject;
 

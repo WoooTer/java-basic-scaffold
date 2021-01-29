@@ -4,4 +4,7 @@
     <select id="selectList" resultType="wooter.db.entity.Product">
         select * from product
     </select>
+    <update id="updateName">
+        update product set name = #{name} where id = #{id}
+    </update>
 </mapper>

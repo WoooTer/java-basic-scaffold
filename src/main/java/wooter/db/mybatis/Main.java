@@ -10,26 +10,53 @@ import java.util.List;
 /**
  * <version>3.5.3</version>
  *
- * https://mybatis.org/mybatis-3/zh/getting-started.html
+ * [官网](https://mybatis.org/mybatis-3/zh/getting-started.html)
+ *
  * [mybatis 3.x源码深度解析与最佳实践](https://www.cnblogs.com/zhjh256/p/8512392.html)
+ * [Mybatis源码解读-设计模式总结](http://www.crazyant.net/2022.html)
+ *
+ * [自己手写一个Mybatis框架(简化)](https://my.oschina.net/liughDevelop/blog/1631006)
  */
 public class Main {
 
     public static void main(String[] args) {
+        updateManualCommit();
+    }
+
+    public static void selectBySessionSelectList() {
         try (SqlSession session = SqlSessionFactoryContainer.getFactory().openSession()) {
-            List<Product> productList = byMapper(session);
-            System.out.println(productList.size());
+            List<Product> products = session.selectList("wooter.db.mybatis.mapper.ProductMapper.selectList");
+            System.out.println(products);
         }
     }
 
-    public static List<Product> bySessionSelectList(SqlSession session ){
-        List<Product> productList = session.selectList("wooter.db.mybatis.mapper.ProductMapper.selectList");
-        return productList;
+    public static void selectByMapper() {
+        try (SqlSession session = SqlSessionFactoryContainer.getFactory().openSession()) {
+            ProductMapper mapper = session.getMapper(ProductMapper.class);
+            List<Product> products = mapper.selectList();
+            System.out.println(products);
+        }
     }
 
-    public static List<Product> byMapper(SqlSession session ){
-        ProductMapper mapper = session.getMapper(ProductMapper.class);
-        List<Product> productList = mapper.selectList();
-        return productList;
+    public static void updateAutoCommit() {
+        try (SqlSession session = SqlSessionFactoryContainer.getFactory().openSession(true)) {
+            ProductMapper mapper = session.getMapper(ProductMapper.class);
+            int count = mapper.updateName(6, "手套Auto");
+            System.out.println(count);
+        }
+    }
+
+    public static void updateManualCommit() {
+        try (SqlSession session = SqlSessionFactoryContainer.getFactory().openSession()) {
+            try {
+                ProductMapper mapper = session.getMapper(ProductMapper.class);
+                int count = mapper.updateName(6, "手套Manual");
+                System.out.println(count);
+                session.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.rollback();
+            }
+        }
     }
 }
