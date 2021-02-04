@@ -60,7 +60,7 @@ public class MyStatement {
                 ex.printStackTrace();
 
                 try {
-                    connection.rollback();
+                    if (connection != null) connection.rollback();
                 } catch (SQLException excep) {
                     excep.printStackTrace();
                 }
