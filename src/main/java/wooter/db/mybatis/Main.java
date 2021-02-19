@@ -2,7 +2,6 @@ package wooter.db.mybatis;
 
 import org.apache.ibatis.session.SqlSession;
 import wooter.db.entity.Product;
-import wooter.db.mybatis.config.SqlSessionFactoryContainer;
 import wooter.db.mybatis.mapper.ProductMapper;
 
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        updateManualCommit();
+        selectByMapper();
     }
 
     public static void selectBySessionSelectList() {

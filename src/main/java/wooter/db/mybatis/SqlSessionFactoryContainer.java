@@ -1,4 +1,4 @@
-package wooter.db.mybatis.config;
+package wooter.db.mybatis;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ibatis.mapping.Environment;
