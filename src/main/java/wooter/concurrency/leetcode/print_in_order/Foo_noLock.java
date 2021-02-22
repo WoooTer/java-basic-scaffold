@@ -10,6 +10,9 @@ public class Foo_noLock {
     private volatile int stage = 1;
 
     public void first(Runnable printFirst) throws InterruptedException {
+        while (stage != 1) {
+            Thread.yield();
+        }
         printFirst.run();
         stage = 2;
     }

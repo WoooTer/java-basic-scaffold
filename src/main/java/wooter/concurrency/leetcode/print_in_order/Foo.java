@@ -1,5 +1,7 @@
 package wooter.concurrency.leetcode.print_in_order;
 
+import static wooter.utils.RunnableWrapper.exWrapper;
+
 public class Foo {
 
     public void first() {
@@ -17,17 +19,22 @@ public class Foo {
     public static void main(String[] args) {
         Foo foo = new Foo();
 
-        new Thread(() -> {
+        Thread first = new Thread(() -> {
             foo.first();
-        }).start();
+        });
 
-        new Thread(() -> {
+        Thread second = new Thread(exWrapper(() -> {
+            first.join();
             foo.second();
-        }).start();
+        }));
 
-        new Thread(() -> {
+        Thread third = new Thread(exWrapper(() -> {
+            second.join();
             foo.third();
-        }).start();
+        }));
 
+        first.start();
+        second.start();
+        third.start();
     }
 }

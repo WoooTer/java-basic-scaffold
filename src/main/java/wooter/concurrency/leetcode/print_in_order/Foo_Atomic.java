@@ -11,6 +11,9 @@ public class Foo_Atomic {
     private AtomicInteger stage = new AtomicInteger(1);
 
     public void first(Runnable printFirst) throws InterruptedException {
+        while (stage.get() != 1) {
+            Thread.yield();
+        }
         printFirst.run();
         stage.incrementAndGet();
     }
