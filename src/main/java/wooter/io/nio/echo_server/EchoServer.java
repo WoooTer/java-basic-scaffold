@@ -1,0 +1,86 @@
+package wooter.io.nio.echo_server;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+import java.util.Set;
+
+/**
+ *  【Baeldung Tag: Java NIO】https://www.baeldung.com/tag/java-nio/
+ *  【Introduction to the Java NIO Selector】 https://www.baeldung.com/java-nio-selector
+ */
+public class EchoServer {
+
+    private static final String POISON_PILL = "POISON_PILL";
+
+    public static void main(String[] args) throws IOException {
+        Selector selector = Selector.open();
+        ServerSocketChannel serverSocket = ServerSocketChannel.open();
+        serverSocket.bind(new InetSocketAddress("localhost", 83));
+        serverSocket.configureBlocking(false);
+        serverSocket.register(selector, SelectionKey.OP_ACCEPT);
+
+        while (true) {
+            selector.select();
+            Set<SelectionKey> selectedKeys = selector.selectedKeys();
+            Iterator<SelectionKey> iter = selectedKeys.iterator();
+            while (iter.hasNext()) {
+
+                SelectionKey key = iter.next();
+
+                if (key.isAcceptable()) {
+                    register(selector, serverSocket);
+                }
+
+                if (key.isReadable()) {
+                    answerWithEcho(key);
+                }
+                iter.remove();
+            }
+        }
+    }
+
+    private static void answerWithEcho(SelectionKey key)
+            throws IOException {
+
+        SocketChannel client = (SocketChannel) key.channel();
+        ByteBuffer buffer = (ByteBuffer) key.attachment();
+
+        client.read(buffer);
+        if (new String(buffer.array()).trim().equals(POISON_PILL)) {
+            client.close();
+            System.out.println("Not accepting client messages anymore");
+        }
+
+        //When we desire to write to a buffer from which we have been reading, we must call the flip() method.
+        //set the buffer to write mode by calling the flip method
+        buffer.flip();
+        client.write(buffer);
+        buffer.clear();
+    }
+
+    private static void register(Selector selector, ServerSocketChannel serverSocket)
+            throws IOException {
+
+        SocketChannel client = serverSocket.accept();
+        client.configureBlocking(false);
+        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(256));
+    }
+
+    public static Process start() throws IOException, InterruptedException {
+        String javaHome = System.getProperty("java.home");
+        String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
+        String classpath = System.getProperty("java.class.path");
+        String className = EchoServer.class.getCanonicalName();
+
+        ProcessBuilder builder = new ProcessBuilder(javaBin, "-cp", classpath, className);
+
+        return builder.start();
+    }
+}
