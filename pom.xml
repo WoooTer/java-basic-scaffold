@@ -109,6 +109,20 @@
             <version>2.7</version>
         </dependency>
 
+        <!-- https://github.com/ChihoSin/weed-client -->
+        <dependency>
+            <groupId>org.lokra.seaweedfs</groupId>
+            <artifactId>seaweedfs-client</artifactId>
+            <version>0.7.3.RELEASE</version>
+        </dependency>
+
+        <!-- https://pdfbox.apache.org/docs/2.0.0/javadocs/overview-summary.html -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
