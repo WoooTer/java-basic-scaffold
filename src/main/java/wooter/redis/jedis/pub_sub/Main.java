@@ -1,7 +1,7 @@
 package wooter.redis.jedis.pub_sub;
 
 import redis.clients.jedis.Jedis;
-import wooter.redis.jedis.RedisConfig;
+import wooter.redis.jedis.JedisConfig;
 
 import java.util.Date;
 import java.util.concurrent.*;
@@ -24,12 +24,12 @@ public class Main {
         pool.execute(() -> {
             System.out.println("【sub start】");
             // Note that subscribe is a blocking operation because it will poll Redis for responses on the thread that calls subscribe
-            new Jedis(RedisConfig.HOST).subscribe(myListener, "foo");
+            new Jedis(JedisConfig.HOST).subscribe(myListener, "foo");
         });
     }
 
     public static void pub() throws Exception {
-        Jedis jedis = new Jedis(RedisConfig.HOST);
+        Jedis jedis = new Jedis(JedisConfig.HOST);
 
         scheduledPool.scheduleWithFixedDelay(() -> {
             String message = new Date().toString();

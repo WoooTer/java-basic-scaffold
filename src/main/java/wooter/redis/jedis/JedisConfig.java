@@ -13,11 +13,11 @@ import java.util.Set;
  * https://www.runoob.com/redis/redis-strings.html
  * https://redis.io/commands
  */
-public class RedisConfig {
+public class JedisConfig {
 
     public static final String HOST = "192.168.1.157";
 
-    public static Jedis jedis = new Jedis(RedisConfig.HOST);
+    public static Jedis jedis = new Jedis(JedisConfig.HOST);
 
     public static void main(String[] args) {
         singleInstance();

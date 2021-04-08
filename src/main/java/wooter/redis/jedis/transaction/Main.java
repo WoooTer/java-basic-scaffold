@@ -3,7 +3,7 @@ package wooter.redis.jedis.transaction;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Response;
 import redis.clients.jedis.Transaction;
-import wooter.redis.jedis.RedisConfig;
+import wooter.redis.jedis.JedisConfig;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Main {
 
-    public static Jedis jedis = RedisConfig.jedis;
+    public static Jedis jedis = JedisConfig.jedis;
 
     public static void main(String[] args) throws Exception {
 

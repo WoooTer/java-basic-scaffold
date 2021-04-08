@@ -1,7 +1,7 @@
 package wooter.redis.jedis.data_structure;
 
 import redis.clients.jedis.Jedis;
-import wooter.redis.jedis.RedisConfig;
+import wooter.redis.jedis.JedisConfig;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class HashOperation {
 
-    public static Jedis jedis = RedisConfig.jedis;
+    public static Jedis jedis = JedisConfig.jedis;
 
     public static void main(String[] args) {
         hsetnx();

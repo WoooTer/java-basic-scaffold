@@ -3,11 +3,11 @@ package wooter.redis.jedis.pipeline;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Response;
-import wooter.redis.jedis.RedisConfig;
+import wooter.redis.jedis.JedisConfig;
 
 public class Main {
 
-    public static Jedis jedis = RedisConfig.jedis;
+    public static Jedis jedis = JedisConfig.jedis;
 
     public static void main(String[] args) {
 

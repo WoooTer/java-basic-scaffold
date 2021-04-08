@@ -2,13 +2,13 @@ package wooter.redis.jedis.data_structure;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ZParams;
-import wooter.redis.jedis.RedisConfig;
+import wooter.redis.jedis.JedisConfig;
 
 import java.util.Set;
 
 public class SortedSetOperation {
 
-    public static Jedis jedis = RedisConfig.jedis;
+    public static Jedis jedis = JedisConfig.jedis;
 
     public static void main(String[] args) {
         zscore();
