@@ -82,6 +82,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.11.0</version>
+        </dependency>
+
         <!-- https://github.com/ChihoSin/weed-client -->
         <dependency>
             <groupId>org.lokra.seaweedfs</groupId>
