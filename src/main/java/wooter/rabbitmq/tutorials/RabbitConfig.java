@@ -2,6 +2,9 @@ package wooter.rabbitmq.tutorials;
 
 import com.rabbitmq.client.ConnectionFactory;
 
+/**
+ * https://www.rabbitmq.com/api-guide.html
+ */
 public class RabbitConfig {
 
     public static final String HOST = "192.168.1.157";
@@ -16,5 +19,5 @@ public class RabbitConfig {
         factory.setPassword(RabbitConfig.PASSWORD);
     }
 
-
 }
+
