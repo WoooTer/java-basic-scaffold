@@ -1,4 +1,4 @@
-package wooter.spring.annotation.eg1;
+package wooter.annotation.type;
 
 /**
  * https://www.baeldung.com/java-custom-annotation

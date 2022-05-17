@@ -1,4 +1,4 @@
-package wooter.spring.annotation.eg1;
+package wooter.annotation.type;
 
 import org.apache.commons.lang3.StringUtils;
 

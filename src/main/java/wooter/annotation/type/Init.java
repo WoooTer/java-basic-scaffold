@@ -1,4 +1,4 @@
-package wooter.spring.annotation.eg1;
+package wooter.annotation.type;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface JsonElement {
-    String key() default "";
+@Target(ElementType.METHOD)
+public @interface Init {
 }
