@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Compress
+@Gzip
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
 
-    private Long id;
+    private Integer id;
 
-    @Compress
+    @Gzip
     private String name;
 }

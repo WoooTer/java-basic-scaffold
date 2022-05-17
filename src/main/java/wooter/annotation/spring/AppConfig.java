@@ -8,13 +8,18 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan(basePackageClasses = PersonCall.class)
+@ComponentScan(basePackageClasses = AppConfig.class)
 public class AppConfig {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(wooter.annotation.spring.AppConfig.class);
         PersonCall personCall = ctx.getBean(PersonCall.class);
-        personCall.call(null, null);
+
+        Person param = new Person(1, "小明");
+        personCall.save(param);
+
+        Person returnParam = personCall.query();
+        System.out.println(returnParam.getName());
     }
 
 }
