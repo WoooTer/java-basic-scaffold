@@ -1,13 +1,13 @@
 package wooter.annotation.spring.pojo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import wooter.annotation.spring.Gzip;
 
+import java.util.List;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class Person extends Animal {
 
     private Integer id;
@@ -15,12 +15,12 @@ public class Person extends Animal {
     @Gzip
     private String name;
 
+    @Gzip
+    private String[] titleArray;
+
     private Address address;
 
-    public Person(Integer id, String name, String category, Address address) {
-        super(category);
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
+    private Address[] addressArray;
+
+    private List<Address> addressList;
 }

@@ -1,13 +1,11 @@
 package wooter.annotation.spring.pojo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import wooter.annotation.spring.Gzip;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class Address {
 
     private Integer cityId;

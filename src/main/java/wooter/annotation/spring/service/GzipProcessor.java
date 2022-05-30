@@ -12,6 +12,9 @@ import wooter.utils.BaseGzipUtils;
 import java.lang.reflect.Field;
 import java.util.List;
 
+/**
+ * 只支持类及其父类的自己 field, 且不支持集合 field
+ */
 //@Aspect
 //@Component
 public class GzipProcessor {

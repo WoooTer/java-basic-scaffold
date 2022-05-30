@@ -1,6 +1,7 @@
 package wooter.utils;
 
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.lang.annotation.Annotation;
@@ -8,7 +9,6 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -17,20 +17,42 @@ import java.util.Set;
 
 public class MyClassUtils {
 
+    /**
+     * 判断是否为基本类型、基本类型数组
+     * 
+     * @param clazz
+     * @return
+     */
     public static boolean isSimpleProperty(Class<?> clazz) {
         if (clazz == null) {
             return false;
         } else {
-            return isSimpleValueType(clazz) || clazz.isArray() && isSimpleValueType(clazz.getComponentType());
+            return isSimpleValueType(clazz) || isSimpleValueTypeArray(clazz);
         }
     }
 
+    /**
+     * 判断是否为基本类型
+     * 
+     * @param type
+     * @return
+     */
     public static boolean isSimpleValueType(Class<?> type) {
         return Void.class != type && Void.TYPE != type
             && (ClassUtils.isPrimitiveOrWrapper(type) || Enum.class.isAssignableFrom(type)
                 || CharSequence.class.isAssignableFrom(type) || Number.class.isAssignableFrom(type)
                 || Date.class.isAssignableFrom(type) || URI.class == type || URL.class == type || Locale.class == type
                 || Class.class == type);
+    }
+
+    /**
+     * 判断是否为基本类型数组
+     * 
+     * @param clazz
+     * @return
+     */
+    public static boolean isSimpleValueTypeArray(Class<?> clazz) {
+        return clazz.isArray() && isSimpleValueType(clazz.getComponentType());
     }
 
     /**
@@ -50,7 +72,7 @@ public class MyClassUtils {
             return Collections.EMPTY_LIST;
         }
         inspected.add(root);
-        for (final Field field : gatherFields(root.getClass())) {
+        for (final Field field : FieldUtils.getAllFieldsList(root.getClass())) {
             field.setAccessible(true);
             final Object currentValue = field.get(root);
             field.setAccessible(false);
@@ -60,21 +82,11 @@ public class MyClassUtils {
                 if (currentValue != null) {
                     inspected.add(currentValue);
                 }
-            } else if (currentValue != null) {
+            } else if (currentValue != null && !isSimpleValueType(currentValue.getClass())) {
                 // Searching for annotated fields in nested classes:
                 annotatedValues.addAll(getAnnotatedValues(currentValue, inspected, annotationClazz));
             }
         }
         return annotatedValues;
-    }
-
-    private static Iterable<Field> gatherFields(Class<?> fromClass) {
-        // Finds ALL fields, even the ones from super classes.
-        final List<Field> fields = new ArrayList<>();
-        while (fromClass != null) {
-            fields.addAll(Arrays.asList(fromClass.getDeclaredFields()));
-            fromClass = fromClass.getSuperclass();
-        }
-        return fields;
     }
 }

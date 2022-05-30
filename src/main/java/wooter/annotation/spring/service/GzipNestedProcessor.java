@@ -14,9 +14,12 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.List;
 
-@Aspect
-@Component
-public class GzipNestProcessor {
+/**
+ * 只支持类及其父类的自己 field 及嵌套 field , 且不支持集合 field
+ */
+//@Aspect
+//@Component
+public class GzipNestedProcessor {
 
     @Pointcut("@annotation(wooter.annotation.spring.Gzip)")
     public void handleCompressAnnotation() {}
@@ -47,10 +50,10 @@ public class GzipNestProcessor {
             List<Pair<Field, Object>> pairList = MyClassUtils.getAnnotatedValues(arg, new HashSet<>(), Gzip.class);
             for (Pair<Field, Object> pair : pairList) {
                 Field field = pair.getLeft();
-                Object argObj = pair.getRight();
+                Object obj = pair.getRight();
                 if (String.class.isAssignableFrom(field.getType())) {
                     field.setAccessible(true);
-                    field.set(argObj, BaseGzipUtils.compressGzip((String)field.get(argObj)));
+                    field.set(obj, BaseGzipUtils.compressGzip((String)field.get(obj)));
                 }
             }
         }
@@ -70,10 +73,10 @@ public class GzipNestProcessor {
         List<Pair<Field, Object>> pairList = MyClassUtils.getAnnotatedValues(result, new HashSet<>(), Gzip.class);
         for (Pair<Field, Object> pair : pairList) {
             Field field = pair.getLeft();
-            Object argObj = pair.getRight();
+            Object obj = pair.getRight();
             if (String.class.isAssignableFrom(field.getType())) {
                 field.setAccessible(true);
-                field.set(argObj, BaseGzipUtils.uncompressGzip((String)field.get(argObj)));
+                field.set(obj, BaseGzipUtils.uncompressGzip((String)field.get(obj)));
             }
         }
     }
