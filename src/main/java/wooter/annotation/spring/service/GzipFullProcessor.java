@@ -81,6 +81,10 @@ public class GzipFullProcessor {
              * 没有子节点的 field, 一定是基本类型, 包括基本类型数组
              */
             if (!node.hasChildren()) {
+                if (!node.isAnnotationPresent(Gzip.class)) {
+                    continue;
+                }
+
                 // 字符串数组
                 if (node.isArray() && String.class.isAssignableFrom(field.getType().getComponentType())) {
                     String[] strArray = (String[])field.get(root);
@@ -98,7 +102,7 @@ public class GzipFullProcessor {
             /**
              * 有子节点的 field, 一定是对象类型, 包括对象类型数组、对象类型集合
              */
-            if (node.hasChildren()){
+            if (node.hasChildren()) {
                 // 对象类型数组
                 if (node.isArray()) {
                     for (Object obj : (Object[])field.get(root)) {
