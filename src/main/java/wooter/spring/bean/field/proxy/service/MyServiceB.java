@@ -1,4 +1,4 @@
-package wooter.spring.service;
+package wooter.spring.bean.field.proxy.service;
 
 import org.springframework.stereotype.Component;
 

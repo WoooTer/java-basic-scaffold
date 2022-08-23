@@ -1,4 +1,4 @@
-package wooter.spring.processor;
+package wooter.spring.bean.field.proxy.processor;
 
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.framework.ProxyFactory;
@@ -9,11 +9,11 @@ import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcess
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-import wooter.spring.annotation.MyWrapperMethodInterceptor;
-import wooter.spring.annotation.MyWarpper;
+import wooter.spring.bean.field.proxy.annotation.MyBeanFieldProxyMethodInterceptor;
+import wooter.spring.bean.field.proxy.annotation.MyBeanFieldProxy;
 
 @Service
-public class MyWrapperAutowiredProxy implements MergedBeanDefinitionPostProcessor {
+public class MyBeanFieldProxyAutowiredProxy implements MergedBeanDefinitionPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
@@ -22,8 +22,8 @@ public class MyWrapperAutowiredProxy implements MergedBeanDefinitionPostProcesso
                 field.setAccessible(true);
             }
 
-            MyWarpper myWarpper = field.getAnnotation(MyWarpper.class);
-            if (myWarpper == null) {
+            MyBeanFieldProxy myBeanFieldProxy = field.getAnnotation(MyBeanFieldProxy.class);
+            if (myBeanFieldProxy == null) {
                 return;
             }
 
@@ -35,10 +35,10 @@ public class MyWrapperAutowiredProxy implements MergedBeanDefinitionPostProcesso
             Object fieldObject = field.get(target);
 
             final ProxyFactory proxyFactory = new ProxyFactory();
-            proxyFactory.addAdvisors(new DefaultPointcutAdvisor(new MyWrapperMethodInterceptor()));
+            proxyFactory.addAdvisors(new DefaultPointcutAdvisor(new MyBeanFieldProxyMethodInterceptor()));
             proxyFactory.setTargetSource(new SingletonTargetSource(fieldObject));
 
-            final Object proxy = proxyFactory.getProxy(MyWarpper.class.getClassLoader());
+            final Object proxy = proxyFactory.getProxy(MyBeanFieldProxy.class.getClassLoader());
             field.set(bean, proxy);
         });
         return bean;

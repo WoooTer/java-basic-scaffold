@@ -1,14 +1,14 @@
-package wooter.spring.service;
+package wooter.spring.bean.field.proxy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import wooter.spring.annotation.MyWarpper;
+import wooter.spring.bean.field.proxy.annotation.MyBeanFieldProxy;
 
 @Component
 public class MyServiceA {
 
     @Autowired
-    @MyWarpper
+    @MyBeanFieldProxy
     private MyServiceB myServiceB;
 
     private String name = "my-service-A";

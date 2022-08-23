@@ -1,10 +1,10 @@
-package wooter.spring;
+package wooter.spring.bean.field.proxy;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import wooter.spring.service.MyServiceA;
+import wooter.spring.bean.field.proxy.service.MyServiceA;
 
 /**
  * [Spring Java Config](https://docs.spring.io/spring-framework/docs/5.3.3/reference/html/core.html#beans-java)
