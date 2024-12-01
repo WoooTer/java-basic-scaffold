@@ -6,7 +6,7 @@ import java.util.stream.*;
 
 import static java.util.stream.Collectors.joining;
 
-
+@Deprecated
 public class DecryptPassword {
 
     /*

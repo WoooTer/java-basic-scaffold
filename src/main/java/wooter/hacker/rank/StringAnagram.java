@@ -6,7 +6,7 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 
 
-public class Anagram {
+public class StringAnagram {
 
     /*
      * Complete the 'stringAnagram' function below.
@@ -18,7 +18,7 @@ public class Anagram {
      */
 
     public static List<Integer> stringAnagram(List<String> dictionary, List<String> query) {
-        List<Map<Character, Integer>> dictionaryParsed = dictionary.stream().map(Anagram::parseStr).collect(Collectors.toList());
+        List<Map<Character, Integer>> dictionaryParsed = dictionary.stream().map(StringAnagram::parseStr).collect(Collectors.toList());
         return query.stream().map(e -> stringAnagramOne(dictionaryParsed, e)).collect(Collectors.toList());
     }
 
