@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class FileOperation {
     public static void createFile() {
+
         try {
             File myObj = new File("filename.txt");
             if (myObj.createNewFile()) {
